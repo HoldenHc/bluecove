@@ -7,9 +7,10 @@
   <artifactId>bluecove</artifactId>
   <version>2.1.1-SNAPSHOT</version>
 
-  <!--bluecove-version-->
   <name>bluecove</name>
   <description>BlueCove is JSR-82 J2SE implementation that currently interfaces with the Mac OS X, WIDCOMM, BlueSoleil and Microsoft Bluetooth stack</description>
+  <url>https://gitlab.com/ultreiaio/bluecove</url>
+  <inceptionYear>2018</inceptionYear>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -17,6 +18,15 @@
     </license>
   </licenses>
 
+  <organization>
+    <name>Ultreia.io</name>
+    <url>http://ultreia.io</url>
+  </organization>
+  <scm>
+    <url>https://gitlab.com/ultreiaio/bluecove</url>
+    <connection>scm:git:git@gitlab.com:ultreiaio/bluecove.git</connection>
+    <developerConnection>scm:git:ssh://git@gitlab.com:ultreiaio/bluecove.git</developerConnection>
+  </scm>
   <developers>
     <developer>
       <name>Paul Totterman</name>
@@ -163,6 +173,34 @@
           <artifactId>maven-deploy-plugin</artifactId>
           <version>2.8.2</version>
         </plugin>
+
+        <plugin>
+          <groupId>io.ultreia.java4all.jgitflow</groupId>
+          <artifactId>jgitflow-maven-plugin</artifactId>
+          <version>1.0.0-rc-1</version>
+          <configuration>
+            <flowInitContext>
+              <versionTagPrefix>v</versionTagPrefix>
+            </flowInitContext>
+            <scmCommentPrefix>[jgitflow-maven-plugin]</scmCommentPrefix>
+            <scmCommentSuffix>[skip ci]</scmCommentSuffix>
+            <autoVersionSubmodules>true</autoVersionSubmodules>
+            <addScmCommentSuffixOnMerge>false</addScmCommentSuffixOnMerge>
+          </configuration>
+          <executions>
+            <execution>
+              <id>default-cli</id>
+              <goals>
+                <goal>release-finish</goal>
+              </goals>
+              <configuration>
+                <pushReleases>true</pushReleases>
+                <enableSshAgent>true</enableSshAgent>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+
       </plugins>
     </pluginManagement>
 
