@@ -4,7 +4,7 @@
 
   <groupId>io.ultreia</groupId>
   <artifactId>bluecove</artifactId>
-  <version>2.1.1</version>
+  <version>2.1.2-SNAPSHOT</version>
 
   <name>bluecove</name>
   <description>BlueCove is JSR-82 J2SE implementation that currently interfaces with the Mac OS X, WIDCOMM, BlueSoleil and Microsoft Bluetooth stack</description>
