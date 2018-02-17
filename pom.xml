@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"><!-- @version $Revision: 3037 $ ($Author: skarzhevskyy $) $Date: 2010-03-31 17:34:19 -0400 (Wed, 31 Mar 2010) $ -->
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>io.ultreia</groupId>
+  <artifactId>bluecove</artifactId>
+  <version>2.1.1-SNAPSHOT</version>
+
+  <!--bluecove-version-->
+  <name>bluecove</name>
+  <description>BlueCove is JSR-82 J2SE implementation that currently interfaces with the Mac OS X, WIDCOMM, BlueSoleil and Microsoft Bluetooth stack</description>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Paul Totterman</name>
+      <id>paul.totterman</id>
+      <email>paul.totterman@gmail.com</email>
+      <roles>
+        <role>admin</role>
+        <role>developer</role>
+      </roles>
+      <timezone>+2</timezone>
+    </developer>
+    <developer>
+      <name>Vlad Skarzhevskyy</name>
+      <id>skarzhevskyy</id>
+      <email>skarzhevskyy@gmail.com</email>
+      <organization>pyx4me.com</organization>
+      <organizationUrl>http://www.pyx4me.com</organizationUrl>
+      <roles>
+        <role>developer</role>
+        <role>Build master</role>
+        <role>developer-Winsock</role>
+        <role>developer-WIDCOMM</role>
+        <role>developer-OSX</role>
+      </roles>
+      <timezone>-5</timezone>
+    </developer>
+  </developers>
+  <contributors>
+    <contributor>
+      <name>Eric Wagner</name>
+      <email>gnuloki@gmail.com</email>
+      <roles>
+        <role>developer</role>
+        <role>developer-OSX</role>
+      </roles>
+      <timezone>-5</timezone>
+    </contributor>
+
+    <contributor>
+      <name>Sam Halliday</name>
+      <email>sam.halliday@gmail.com</email>
+      <roles>
+        <role>First OS X binary compilation and tests</role>
+      </roles>
+    </contributor>
+
+    <contributor>
+      <name>Tony Chemit</name>
+      <email>dev@tchemit.fr</email>
+      <organization>Ultreia.io</organization>
+      <organizationUrl>http://ultreia.io</organizationUrl>
+      <roles>
+        <role>Package manager</role>
+      </roles>
+    </contributor>
+  </contributors>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
+
+  <properties>
+    <!-- default encoding -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.test.skip>true</maven.test.skip>
+    <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.14</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.jour</groupId>
+      <artifactId>jour-instrument</artifactId>
+      <version>2.0.3</version>
+      <optional>true</optional>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources-gpl</directory>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </resource>
+    </resources>
+    <pluginManagement>
+
+      <plugins>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.7.0</version>
+          <executions>
+            <execution>
+              <id>default-compile</id>
+              <configuration>
+                <compileSourceRoots>
+                  <compileSourceRoot>src/main/java</compileSourceRoot>
+                  <compileSourceRoot>src/main/java-gpl</compileSourceRoot>
+                </compileSourceRoots>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.0.0-M1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.0.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+  </build>
+
+  <profiles>
+    <profile>
+      <id>release-sign-artifacts</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.nuiton</groupId>
+            <artifactId>helper-maven-plugin</artifactId>
+            <version>2.3.2</version>
+            <executions>
+              <execution>
+                <id>get-pgp-pass-phrase</id>
+                <goals>
+                  <goal>share-server-secret</goal>
+                </goals>
+                <phase>verify</phase>
+                <configuration>
+                  <serverId>ultreia-gpg-signer</serverId>
+                  <usernameOut>gpg.keyname</usernameOut>
+                  <passwordOut>gpg.passphrase</passwordOut>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
